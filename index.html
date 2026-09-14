@@ -1,3 +1,4 @@
+
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>BKF Photography Review</title>
 <style>
@@ -7,7 +8,7 @@ header{background:white;padding:42px 5vw 28px;border-bottom:1px solid var(--line
 .brand{font-size:11px;font-weight:800;letter-spacing:.2em;color:var(--blue);text-transform:uppercase}
 h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(36px,5vw,60px);margin:8px 0}
 .intro{max-width:720px;line-height:1.55;color:#697283}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.pill{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 14px;font-size:13px}button.pill{cursor:pointer}
+.pill{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 14px;font-size:13px}button.pill{cursor:pointer}.submitBox{max-width:760px;margin:34px auto 70px;padding:26px;background:white;border:1px solid var(--line);border-radius:18px}.submitBox h2{margin:0 0 8px}.submitBox p{color:#697283;line-height:1.5}.reviewerFields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.reviewerFields input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid var(--line);border-radius:10px;font:inherit}.submitBtn{border:0;border-radius:999px;padding:13px 20px;background:#173b67;color:white;font-weight:700;cursor:pointer}.submitBtn:disabled{opacity:.55;cursor:wait}.submitStatus{margin-left:12px;font-size:14px}.success{color:#24713b}.error{color:#a12b2b}
 main{padding:30px 5vw 70px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 7px 24px rgba(0,0,0,.045)}
 .imageButton{width:100%;aspect-ratio:1/1;padding:0;border:0;background:#ddd;display:block;position:relative;overflow:hidden;cursor:zoom-in}
@@ -21,7 +22,7 @@ textarea{width:100%;min-height:76px;margin-top:9px;padding:10px;border:1px solid
 #lightbox.open{display:flex}#lbimg{max-width:90vw;max-height:84vh;object-fit:contain}.close{position:absolute;right:22px;top:15px;border:0;background:none;color:#fff;font-size:36px;cursor:pointer}
 .nav{position:absolute;top:50%;width:48px;height:48px;border-radius:50%;border:1px solid #ffffff55;background:#ffffff18;color:#fff;font-size:28px;cursor:pointer}.prev{left:20px}.next{right:20px}
 #lbcap{position:absolute;bottom:15px;color:#fff;font-size:13px}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.grid{grid-template-columns:1fr}header,main{padding-left:18px;padding-right:18px}}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.reviewerFields{grid-template-columns:1fr}}@media(max-width:560px){.grid{grid-template-columns:1fr}header,main{padding-left:18px;padding-right:18px}}
 </style></head><body>
 <header><div class="brand">Bar Keeper's Friend × BrandStudios.AI</div><h1>Photography Review</h1>
 <div class="intro">Review the full 22-image set. Click any image to expand it, approve or decline each direction, and leave comments below the image.</div>
@@ -355,7 +356,14 @@ textarea{width:100%;min-height:76px;margin-top:9px;padding:10px;border:1px solid
     </div>
     <textarea id="comment-22" placeholder="Add comments…" oninput="saveComment(22,this.value)"></textarea>
   </div>
-</article></div></main>
+</article></div>
+<section class="submitBox">
+<h2>Submit Review</h2>
+<p>When you are finished, enter your details and submit. Your decisions and comments will be recorded for the BrandStudios.AI team. Submitting does not alter the images or this review page.</p>
+<div class="reviewerFields"><input id="reviewerName" type="text" placeholder="Your name" autocomplete="name"><input id="reviewerEmail" type="email" placeholder="Your email" autocomplete="email"></div>
+<button id="submitBtn" class="submitBtn" onclick="submitReview()">Submit Review</button><span id="submitStatus" class="submitStatus"></span>
+</section>
+</main>
 <div id="lightbox" onclick="if(event.target===this)closeLightbox()"><button class="close" onclick="closeLightbox()">×</button><button class="nav prev" onclick="move(-1)">‹</button><img id="lbimg"><button class="nav next" onclick="move(1)">›</button><div id="lbcap"></div></div>
 <script>
 const photos=[{"id": 1, "src": "assets/bkf_01.jpeg", "name": "tone2_alt.jpeg"}, {"id": 2, "src": "assets/bkf_02.jpg", "name": "tone2_L1_e01(2).jpg"}, {"id": 3, "src": "assets/bkf_03.jpg", "name": "tone2_M1_t01(1).jpg"}, {"id": 4, "src": "assets/bkf_04.jpg", "name": "tone2_M2_t01(1).jpg"}, {"id": 5, "src": "assets/bkf_05.jpg", "name": "tone2_M3b_e01(1).jpg"}, {"id": 6, "src": "assets/bkf_06.jpg", "name": "tone2_M4_t01.jpg"}, {"id": 7, "src": "assets/bkf_07.jpg", "name": "tone2_N1_e01.jpg"}, {"id": 8, "src": "assets/bkf_08.jpg", "name": "tone2_N2_e01.jpg"}, {"id": 9, "src": "assets/bkf_09.jpg", "name": "tone2_N3_e01.jpg"}, {"id": 10, "src": "assets/bkf_10.jpg", "name": "tone2_N4_e01.jpg"}, {"id": 11, "src": "assets/bkf_11.jpg", "name": "tone2_R3c_e01.jpg"}, {"id": 12, "src": "assets/bkf_12.jpg", "name": "tone2_R3c_t01(1).jpg"}, {"id": 13, "src": "assets/bkf_13.jpg", "name": "tone2_R4c_t01.jpg"}, {"id": 14, "src": "assets/bkf_14.jpg", "name": "tone2_S2_t01.jpg"}, {"id": 15, "src": "assets/bkf_15.jpg", "name": "tone2_S1_t01.jpg"}, {"id": 16, "src": "assets/bkf_16.jpg", "name": "tone2_S2_e01.jpg"}, {"id": 17, "src": "assets/bkf_17.jpg", "name": "tone2_R4b_t01.jpg"}, {"id": 18, "src": "assets/bkf_18.jpg", "name": "tone2_R4_t01.jpg"}, {"id": 19, "src": "assets/bkf_19.jpg", "name": "tone2_R2c_t01.jpg"}, {"id": 20, "src": "assets/bkf_20.jpg", "name": "tone2_R1b_t01.jpg"}, {"id": 21, "src": "assets/bkf_21.jpg", "name": "tone2_S3_e01.jpg"}, {"id": 22, "src": "assets/bkf_22.jpg", "name": "tone2_S4_t01.jpg"}], key='bkf-photo-review-22-v1';let current=0,state=JSON.parse(localStorage.getItem(key)||'{}');
@@ -367,6 +375,25 @@ function openLightbox(id){current=photos.findIndex(p=>p.id===id);render();docume
 function render(){let p=photos[current];lbimg.src=p.src;lbcap.textContent=`Image ${String(p.id).padStart(2,'0')} · ${p.name}`}
 function move(n){current=(current+n+photos.length)%photos.length;render()}function closeLightbox(){lightbox.classList.remove('open')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(lightbox.classList.contains('open')){if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)}})
+
+const SUBMIT_ENDPOINT='https://script.google.com/macros/s/AKfycbzs59qIauFH1RSW5gGWvHZz_km7x6eGiSBuviqZocaD6xp-iPu055Sx8PkacGhRmDI3aw/exec';
+async function submitReview(){
+  const name=document.getElementById('reviewerName').value.trim(), email=document.getElementById('reviewerEmail').value.trim();
+  const status=document.getElementById('submitStatus'), btn=document.getElementById('submitBtn');
+  if(!name){status.className='submitStatus error';status.textContent='Please enter your name.';return}
+  if(!email || !/^\S+@\S+\.\S+$/.test(email)){status.className='submitStatus error';status.textContent='Please enter a valid email.';return}
+  if(SUBMIT_ENDPOINT.startsWith('PASTE_')){status.className='submitStatus error';status.textContent='Submission backend has not been connected yet.';return}
+  const submissionId='BKF-'+Date.now()+'-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  const payload={submissionId,reviewer:name,email,submittedAt:new Date().toISOString(),reviews:photos.map(p=>({image:p.id,filename:p.name,decision:(state[p.id]||{}).decision||'open',comment:(state[p.id]||{}).comment||''}))};
+  btn.disabled=true;status.className='submitStatus';status.textContent='Submitting…';
+  try{
+    await fetch(SUBMIT_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)});
+    localStorage.setItem(key+'-last-submission',JSON.stringify({submissionId,submittedAt:payload.submittedAt,reviewer:name,email}));
+    status.className='submitStatus success';status.textContent='Submitted. Thank you. Reference: '+submissionId;
+  }catch(e){status.className='submitStatus error';status.textContent='Could not submit. Please try again.'}
+  finally{btn.disabled=false}
+}
+
 function exportReview(){let rows=photos.map(p=>[p.id,p.name,(state[p.id]||{}).decision||'open',(state[p.id]||{}).comment||'']);let csv=['Image,File,Decision,Comment',...rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(','))].join('\n');let b=new Blob([csv],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='BKF_photo_review.csv';a.click();URL.revokeObjectURL(a.href)}
 function clearReview(){if(confirm('Clear all decisions and comments?')){state={};persist()}}updateUI();
 </script></body></html>
