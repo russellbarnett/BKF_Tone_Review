@@ -1,0 +1,372 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>BKF Photography Review</title>
+<style>
+:root{--navy:#132c51;--blue:#174b91;--cream:#f5f1e8;--gold:#c79b42;--line:#ded7c9;--green:#23734d;--red:#a6473d}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--navy);font-family:Arial,Helvetica,sans-serif}
+header{background:white;padding:42px 5vw 28px;border-bottom:1px solid var(--line)}
+.brand{font-size:11px;font-weight:800;letter-spacing:.2em;color:var(--blue);text-transform:uppercase}
+h1{font-family:Georgia,serif;font-weight:400;font-size:clamp(36px,5vw,60px);margin:8px 0}
+.intro{max-width:720px;line-height:1.55;color:#697283}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.pill{border:1px solid var(--line);background:white;border-radius:999px;padding:9px 14px;font-size:13px}button.pill{cursor:pointer}
+main{padding:30px 5vw 70px}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 7px 24px rgba(0,0,0,.045)}
+.imageButton{width:100%;aspect-ratio:1/1;padding:0;border:0;background:#ddd;display:block;position:relative;overflow:hidden;cursor:zoom-in}
+.imageButton img{width:100%;height:100%;object-fit:cover;display:block;transition:.2s}.imageButton:hover img{transform:scale(1.012)}
+.expand{position:absolute;right:11px;top:11px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.9);font-size:17px}
+.meta{padding:15px}.number{font-size:10px;letter-spacing:.14em;font-weight:800;color:var(--gold);margin-bottom:4px}.filename{font-size:12px;color:#7a8290;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:12px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.decision{padding:10px;border:1px solid var(--line);border-radius:8px;background:#fff;font-weight:700;cursor:pointer}
+.approve.active{background:var(--green);border-color:var(--green);color:#fff}.decline.active{background:var(--red);border-color:var(--red);color:#fff}
+textarea{width:100%;min-height:76px;margin-top:9px;padding:10px;border:1px solid var(--line);border-radius:8px;font:inherit;resize:vertical;background:#fcfbf8}
+#lightbox{display:none;position:fixed;inset:0;background:rgba(7,12,20,.95);z-index:50;align-items:center;justify-content:center;padding:24px}
+#lightbox.open{display:flex}#lbimg{max-width:90vw;max-height:84vh;object-fit:contain}.close{position:absolute;right:22px;top:15px;border:0;background:none;color:#fff;font-size:36px;cursor:pointer}
+.nav{position:absolute;top:50%;width:48px;height:48px;border-radius:50%;border:1px solid #ffffff55;background:#ffffff18;color:#fff;font-size:28px;cursor:pointer}.prev{left:20px}.next{right:20px}
+#lbcap{position:absolute;bottom:15px;color:#fff;font-size:13px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.grid{grid-template-columns:1fr}header,main{padding-left:18px;padding-right:18px}}
+</style></head><body>
+<header><div class="brand">Bar Keepers Friend × BrandStudios.AI</div><h1>Photography Review</h1>
+<div class="intro">Review the full 22-image set. Click any image to expand it, approve or decline each direction, and leave comments below the image.</div>
+<div class="toolbar"><span class="pill" id="count"></span><button class="pill" onclick="exportReview()">Export Review</button><button class="pill" onclick="clearReview()">Reset</button></div></header>
+<main><div class="grid">
+<article class="card" data-id="1">
+  <button class="imageButton" onclick="openLightbox(1)" aria-label="Expand image 1">
+    <img src="assets/bkf_01.jpeg" alt="tone2_alt.jpeg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 01</div>
+    <div class="filename">tone2_alt.jpeg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(1,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(1,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-1" placeholder="Add comments…" oninput="saveComment(1,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="2">
+  <button class="imageButton" onclick="openLightbox(2)" aria-label="Expand image 2">
+    <img src="assets/bkf_02.jpg" alt="tone2_L1_e01(2).jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 02</div>
+    <div class="filename">tone2_L1_e01(2).jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(2,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(2,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-2" placeholder="Add comments…" oninput="saveComment(2,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="3">
+  <button class="imageButton" onclick="openLightbox(3)" aria-label="Expand image 3">
+    <img src="assets/bkf_03.jpg" alt="tone2_M1_t01(1).jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 03</div>
+    <div class="filename">tone2_M1_t01(1).jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(3,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(3,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-3" placeholder="Add comments…" oninput="saveComment(3,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="4">
+  <button class="imageButton" onclick="openLightbox(4)" aria-label="Expand image 4">
+    <img src="assets/bkf_04.jpg" alt="tone2_M2_t01(1).jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 04</div>
+    <div class="filename">tone2_M2_t01(1).jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(4,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(4,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-4" placeholder="Add comments…" oninput="saveComment(4,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="5">
+  <button class="imageButton" onclick="openLightbox(5)" aria-label="Expand image 5">
+    <img src="assets/bkf_05.jpg" alt="tone2_M3b_e01(1).jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 05</div>
+    <div class="filename">tone2_M3b_e01(1).jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(5,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(5,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-5" placeholder="Add comments…" oninput="saveComment(5,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="6">
+  <button class="imageButton" onclick="openLightbox(6)" aria-label="Expand image 6">
+    <img src="assets/bkf_06.jpg" alt="tone2_M4_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 06</div>
+    <div class="filename">tone2_M4_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(6,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(6,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-6" placeholder="Add comments…" oninput="saveComment(6,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="7">
+  <button class="imageButton" onclick="openLightbox(7)" aria-label="Expand image 7">
+    <img src="assets/bkf_07.jpg" alt="tone2_N1_e01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 07</div>
+    <div class="filename">tone2_N1_e01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(7,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(7,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-7" placeholder="Add comments…" oninput="saveComment(7,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="8">
+  <button class="imageButton" onclick="openLightbox(8)" aria-label="Expand image 8">
+    <img src="assets/bkf_08.jpg" alt="tone2_N2_e01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 08</div>
+    <div class="filename">tone2_N2_e01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(8,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(8,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-8" placeholder="Add comments…" oninput="saveComment(8,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="9">
+  <button class="imageButton" onclick="openLightbox(9)" aria-label="Expand image 9">
+    <img src="assets/bkf_09.jpg" alt="tone2_N3_e01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 09</div>
+    <div class="filename">tone2_N3_e01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(9,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(9,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-9" placeholder="Add comments…" oninput="saveComment(9,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="10">
+  <button class="imageButton" onclick="openLightbox(10)" aria-label="Expand image 10">
+    <img src="assets/bkf_10.jpg" alt="tone2_N4_e01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 10</div>
+    <div class="filename">tone2_N4_e01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(10,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(10,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-10" placeholder="Add comments…" oninput="saveComment(10,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="11">
+  <button class="imageButton" onclick="openLightbox(11)" aria-label="Expand image 11">
+    <img src="assets/bkf_11.jpg" alt="tone2_R3c_e01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 11</div>
+    <div class="filename">tone2_R3c_e01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(11,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(11,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-11" placeholder="Add comments…" oninput="saveComment(11,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="12">
+  <button class="imageButton" onclick="openLightbox(12)" aria-label="Expand image 12">
+    <img src="assets/bkf_12.jpg" alt="tone2_R3c_t01(1).jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 12</div>
+    <div class="filename">tone2_R3c_t01(1).jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(12,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(12,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-12" placeholder="Add comments…" oninput="saveComment(12,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="13">
+  <button class="imageButton" onclick="openLightbox(13)" aria-label="Expand image 13">
+    <img src="assets/bkf_13.jpg" alt="tone2_R4c_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 13</div>
+    <div class="filename">tone2_R4c_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(13,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(13,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-13" placeholder="Add comments…" oninput="saveComment(13,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="14">
+  <button class="imageButton" onclick="openLightbox(14)" aria-label="Expand image 14">
+    <img src="assets/bkf_14.jpg" alt="tone2_S2_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 14</div>
+    <div class="filename">tone2_S2_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(14,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(14,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-14" placeholder="Add comments…" oninput="saveComment(14,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="15">
+  <button class="imageButton" onclick="openLightbox(15)" aria-label="Expand image 15">
+    <img src="assets/bkf_15.jpg" alt="tone2_S1_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 15</div>
+    <div class="filename">tone2_S1_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(15,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(15,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-15" placeholder="Add comments…" oninput="saveComment(15,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="16">
+  <button class="imageButton" onclick="openLightbox(16)" aria-label="Expand image 16">
+    <img src="assets/bkf_16.jpg" alt="tone2_S2_e01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 16</div>
+    <div class="filename">tone2_S2_e01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(16,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(16,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-16" placeholder="Add comments…" oninput="saveComment(16,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="17">
+  <button class="imageButton" onclick="openLightbox(17)" aria-label="Expand image 17">
+    <img src="assets/bkf_17.jpg" alt="tone2_R4b_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 17</div>
+    <div class="filename">tone2_R4b_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(17,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(17,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-17" placeholder="Add comments…" oninput="saveComment(17,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="18">
+  <button class="imageButton" onclick="openLightbox(18)" aria-label="Expand image 18">
+    <img src="assets/bkf_18.jpg" alt="tone2_R4_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 18</div>
+    <div class="filename">tone2_R4_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(18,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(18,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-18" placeholder="Add comments…" oninput="saveComment(18,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="19">
+  <button class="imageButton" onclick="openLightbox(19)" aria-label="Expand image 19">
+    <img src="assets/bkf_19.jpg" alt="tone2_R2c_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 19</div>
+    <div class="filename">tone2_R2c_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(19,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(19,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-19" placeholder="Add comments…" oninput="saveComment(19,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="20">
+  <button class="imageButton" onclick="openLightbox(20)" aria-label="Expand image 20">
+    <img src="assets/bkf_20.jpg" alt="tone2_R1b_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 20</div>
+    <div class="filename">tone2_R1b_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(20,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(20,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-20" placeholder="Add comments…" oninput="saveComment(20,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="21">
+  <button class="imageButton" onclick="openLightbox(21)" aria-label="Expand image 21">
+    <img src="assets/bkf_21.jpg" alt="tone2_S3_e01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 21</div>
+    <div class="filename">tone2_S3_e01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(21,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(21,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-21" placeholder="Add comments…" oninput="saveComment(21,this.value)"></textarea>
+  </div>
+</article>
+
+<article class="card" data-id="22">
+  <button class="imageButton" onclick="openLightbox(22)" aria-label="Expand image 22">
+    <img src="assets/bkf_22.jpg" alt="tone2_S4_t01.jpg" loading="lazy"><span class="expand">↗</span>
+  </button>
+  <div class="meta">
+    <div class="number">IMAGE 22</div>
+    <div class="filename">tone2_S4_t01.jpg</div>
+    <div class="actions">
+      <button class="decision approve" onclick="setDecision(22,'approved')">✓ Approve</button>
+      <button class="decision decline" onclick="setDecision(22,'declined')">× Decline</button>
+    </div>
+    <textarea id="comment-22" placeholder="Add comments…" oninput="saveComment(22,this.value)"></textarea>
+  </div>
+</article></div></main>
+<div id="lightbox" onclick="if(event.target===this)closeLightbox()"><button class="close" onclick="closeLightbox()">×</button><button class="nav prev" onclick="move(-1)">‹</button><img id="lbimg"><button class="nav next" onclick="move(1)">›</button><div id="lbcap"></div></div>
+<script>
+const photos=[{"id": 1, "src": "assets/bkf_01.jpeg", "name": "tone2_alt.jpeg"}, {"id": 2, "src": "assets/bkf_02.jpg", "name": "tone2_L1_e01(2).jpg"}, {"id": 3, "src": "assets/bkf_03.jpg", "name": "tone2_M1_t01(1).jpg"}, {"id": 4, "src": "assets/bkf_04.jpg", "name": "tone2_M2_t01(1).jpg"}, {"id": 5, "src": "assets/bkf_05.jpg", "name": "tone2_M3b_e01(1).jpg"}, {"id": 6, "src": "assets/bkf_06.jpg", "name": "tone2_M4_t01.jpg"}, {"id": 7, "src": "assets/bkf_07.jpg", "name": "tone2_N1_e01.jpg"}, {"id": 8, "src": "assets/bkf_08.jpg", "name": "tone2_N2_e01.jpg"}, {"id": 9, "src": "assets/bkf_09.jpg", "name": "tone2_N3_e01.jpg"}, {"id": 10, "src": "assets/bkf_10.jpg", "name": "tone2_N4_e01.jpg"}, {"id": 11, "src": "assets/bkf_11.jpg", "name": "tone2_R3c_e01.jpg"}, {"id": 12, "src": "assets/bkf_12.jpg", "name": "tone2_R3c_t01(1).jpg"}, {"id": 13, "src": "assets/bkf_13.jpg", "name": "tone2_R4c_t01.jpg"}, {"id": 14, "src": "assets/bkf_14.jpg", "name": "tone2_S2_t01.jpg"}, {"id": 15, "src": "assets/bkf_15.jpg", "name": "tone2_S1_t01.jpg"}, {"id": 16, "src": "assets/bkf_16.jpg", "name": "tone2_S2_e01.jpg"}, {"id": 17, "src": "assets/bkf_17.jpg", "name": "tone2_R4b_t01.jpg"}, {"id": 18, "src": "assets/bkf_18.jpg", "name": "tone2_R4_t01.jpg"}, {"id": 19, "src": "assets/bkf_19.jpg", "name": "tone2_R2c_t01.jpg"}, {"id": 20, "src": "assets/bkf_20.jpg", "name": "tone2_R1b_t01.jpg"}, {"id": 21, "src": "assets/bkf_21.jpg", "name": "tone2_S3_e01.jpg"}, {"id": 22, "src": "assets/bkf_22.jpg", "name": "tone2_S4_t01.jpg"}], key='bkf-photo-review-22-v1';let current=0,state=JSON.parse(localStorage.getItem(key)||'{}');
+function persist(){localStorage.setItem(key,JSON.stringify(state));updateUI()}
+function setDecision(id,d){state[id]=state[id]||{};state[id].decision=state[id].decision===d?'':d;persist()}
+function saveComment(id,v){state[id]=state[id]||{};state[id].comment=v;localStorage.setItem(key,JSON.stringify(state))}
+function updateUI(){let a=0,d=0;photos.forEach(p=>{const s=state[p.id]||{},c=document.querySelector(`[data-id="${p.id}"]`);c.querySelectorAll('.decision').forEach(b=>b.classList.remove('active'));if(s.decision==='approved'){c.querySelector('.approve').classList.add('active');a++}if(s.decision==='declined'){c.querySelector('.decline').classList.add('active');d++}const t=document.getElementById('comment-'+p.id);if(document.activeElement!==t)t.value=s.comment||''});document.getElementById('count').textContent=`${a} approved · ${d} declined · ${photos.length-a-d} open`}
+function openLightbox(id){current=photos.findIndex(p=>p.id===id);render();document.getElementById('lightbox').classList.add('open')}
+function render(){let p=photos[current];lbimg.src=p.src;lbcap.textContent=`Image ${String(p.id).padStart(2,'0')} · ${p.name}`}
+function move(n){current=(current+n+photos.length)%photos.length;render()}function closeLightbox(){lightbox.classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(lightbox.classList.contains('open')){if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)}})
+function exportReview(){let rows=photos.map(p=>[p.id,p.name,(state[p.id]||{}).decision||'open',(state[p.id]||{}).comment||'']);let csv=['Image,File,Decision,Comment',...rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(','))].join('\n');let b=new Blob([csv],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='BKF_photo_review.csv';a.click();URL.revokeObjectURL(a.href)}
+function clearReview(){if(confirm('Clear all decisions and comments?')){state={};persist()}}updateUI();
+</script></body></html>
